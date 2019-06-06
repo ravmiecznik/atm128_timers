@@ -6,8 +6,8 @@
  */
 #include "timers_r.h"
 #include <avr/interrupt.h>
-#include "avr_ports.h"
-#include "common.h"
+#include "../avr_ports/avr_ports.h"
+#include "../common.h"
 #define __ASSERT_USE_STDERR
 #include <assert.h>
 
@@ -48,6 +48,10 @@ ISR(TIMER1_OVF_vect){
 
 #ifdef TIMER3
 volatile uint32_t TOI_COUNTER_TIMER3 = 0;
+
+void null_function(){
+
+}
 
 void (*TOI_ISR_FUNCTION_POINTER_TIMER3)(void) = null_function;
 void (*T3COMPA_FUNC_GLOB_PTR)(void) = null_function;
