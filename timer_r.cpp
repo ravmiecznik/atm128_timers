@@ -8,8 +8,7 @@
 #include <avr/interrupt.h>
 #include "../avr_ports/avr_ports.h"
 #include "../common.h"
-#define __ASSERT_USE_STDERR
-#include <assert.h>
+
 
 #ifdef TIMER1
 volatile uint32_t TOI_COUNTER_TIMER1 = 0;
@@ -209,7 +208,7 @@ uint32_t cycles_to_ns(uint32_t cycles, uint16_t _prescaler){
 }
 
 uint16_t ms_to_cycles(uint16_t ms, uint16_t _prescaler){
-	uint32_t cycles = ms*F_CPU/1000ULL/_prescaler;
+	uint32_t cycles = ms*(F_CPU/1000ULL)/_prescaler;
 	assert(cycles <= 0xffffULL);
 	return (uint16_t)cycles;
 }
