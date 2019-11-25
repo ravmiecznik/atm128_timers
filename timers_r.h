@@ -253,11 +253,17 @@ public:
 	uint16_t cycles_to_ns(uint16_t cycles){
 		return ::cycles_to_ns(cycles, _prescaler);
 	}
+	void delay_ocra(uint16_t ms){
+		ocra = tcnt_get() + ms_to_cycles(ms);
+	}
+	void delay_ocrb(uint16_t ms){
+		ocrb = tcnt_get() + ms_to_cycles(ms);
+	}
 };
 
 uint32_t test32(uint32_t val);
 
-class Timer1: Timer
+class Timer1: public Timer
 {
 public:
 	using Timer::tccrb_get;
@@ -291,7 +297,7 @@ public:
 	}
 };
 
-class Timer3: Timer
+class Timer3: public Timer
 {
 public:
 	using Timer::tccrb_get;
