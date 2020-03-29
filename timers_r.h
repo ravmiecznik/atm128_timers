@@ -9,6 +9,7 @@
 #define TIMERS_R_H_
 #include <avr/io.h>
 #include <stdlib.h>
+#include <util/atomic.h>
 
 
 typedef volatile uint8_t& reg8b_ref;
@@ -257,7 +258,9 @@ public:
 		ocra = tcnt_get() + ms_to_cycles(ms);
 	}
 	void delay_ocrb(uint16_t ms){
-		ocrb = tcnt_get() + ms_to_cycles(ms);
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE){
+			ocrb = tcnt_get() + ms_to_cycles(ms);
+		}
 	}
 };
 
