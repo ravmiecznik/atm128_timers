@@ -202,14 +202,38 @@ public:
 	uint16_t _prescaler;
 	time_stamp _tic;
 	time_stamp t_stamp;
-	Timer(reg8b_ref tccra, reg8b_ref tccrb, reg8b_ref tccrc, reg16b_ref ocra, reg16b_ref ocrb, reg16b_ref ocrc, reg16b_ref icr, reg16b_ref tcnt,
-			uint16_t& compa_kick, uint16_t& compb_kick, uint16_t& compc_kick, volatile uint32_t& overflow_cnt):
-		tccra(tccra), tccrb(tccrb), tccrc(tccrc), ocra(ocra), ocrb(ocrb), ocrc(ocrc), icr(icr), tcnt(tcnt), overflow_cnt(overflow_cnt),
-		compa_kick(compa_kick), compb_kick(compb_kick), compc_kick(compc_kick){
+	Timer(
+			reg8b_ref tccra,
+			reg8b_ref tccrb,
+			reg8b_ref tccrc,
+			reg16b_ref ocra,
+			reg16b_ref ocrb,
+			reg16b_ref ocrc,
+			reg16b_ref icr,
+			reg16b_ref tcnt,
+			uint16_t& compa_kick,
+			uint16_t& compb_kick,
+			uint16_t& compc_kick,
+			volatile uint32_t& overflow_cnt
+			):
+		tccra(tccra),
+		tccrb(tccrb),
+		tccrc(tccrc),
+		ocra(ocra),
+		ocrb(ocrb),
+		ocrc(ocrc),
+		icr(icr),
+		tcnt(tcnt),
+		overflow_cnt(overflow_cnt),
+		compa_kick(compa_kick),
+		compb_kick(compb_kick),
+		compc_kick(compc_kick)
+	{
 		_tic = {0, 0};
 		_prescaler = 0;
 		t_stamp = {0, 0};
 	};
+
 	uint16_t get_prescaler(timer_prescaler);
 	uint8_t tccrb_get();
 	uint16_t ms(uint32_t cycles){
